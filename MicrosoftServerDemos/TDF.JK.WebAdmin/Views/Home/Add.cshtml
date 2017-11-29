@@ -1,0 +1,445 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@section styles{
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/Scripts/t2m_adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <link href="~/Scripts/t2m_adminlte/plugins/jquery-multi-select/css/multi-select.css" rel="stylesheet" />
+
+}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        图片识别
+        @*<small>工作台</small>*@
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-book"></i> 图片</a></li>
+        <li class="active">图片识别</li>
+    </ol>
+</section>
+
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="box box-primary">
+       
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-5">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">图片：<span class="required" aria-required="true">*</span></label>
+                                    <div class="col-md-9">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+
+
+                                            <div class="col-md-12">
+                                                <div id="uploader-demo" class="wu-example" style="width: 105px; display: inline-block;">
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <input type="hidden" id="hidd_imgPath" value="" />
+                                <button id="btn_ocr" type="button" class="btn btn-default btn-sm" onclick="return $('#img').click()">开始识别</button>
+                                <input type="file"  id="img" accept="image/*" style="display:none">
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div id="divFlies" class="uploader-list" style="margin-left: 10px;  margin-top: 10px;">
+                                <img  src="" id="imgRead"/>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-7">
+                        <div class="row">
+                            <form id="form_search" class="form-horizontal">
+                                <input name="Id" type="hidden" class="form-control" value="">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">姓名</label>
+                                            <div class="col-sm-8">
+                                                <input id="name" name="name" type="text" class="form-control input-sm" placeholder="" value="">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">年龄</label>
+                                            <div class="col-sm-8">
+                                                <input id="age" name="age" type="text" class="form-control input-sm" placeholder="" value="">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">性别</label>
+                                            <div class="col-sm-8">
+                                                <input id="sex" name="sex" type="text" class="form-control input-sm" placeholder="" value="">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">学历</label>
+                                            <div class="col-sm-8">
+                                                <input id="education" name="education" type="text" class="form-control input-sm" placeholder="" value="">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">籍贯</label>
+                                            <div class="col-sm-8">
+                                                <input id="Place" name="Place" type="text" class="form-control input-sm" placeholder="" value="">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">民族</label>
+                                            <div class="col-sm-8">
+                                                <input id="nation" name="nation" type="text" class="form-control input-sm" placeholder="" value="">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">身份证</label>
+                                            <div class="col-sm-8">
+                                                <input id="meid" name="meid" type="text" class="form-control input-sm" placeholder="" value="">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                   
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">身高</label>
+                                            <div class="col-sm-8">
+                                                <input id="height" name="height" type="text" class="form-control input-sm" placeholder="" value="">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">体重</label>
+                                            <div class="col-sm-8">
+                                                <input id="weight" name="weight" type="text" class="form-control input-sm" placeholder="" value="">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">联系方式</label>
+                                            <div class="col-sm-8">
+                                                <input id="call" name="call" type="text" class="form-control input-sm" placeholder="" value="">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                               
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">婚姻状况</label>
+                                            <div class="col-sm-8">
+                                                <input id="marital" name="marital" type="text" class="form-control input-sm" placeholder="" value="">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">兴趣爱好</label>
+                                                <div class="col-sm-8">
+                                                    <input id="love" name="love" type="text" class="form-control input-sm" placeholder="" value="">
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                     
+
+                                    </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">学习经历</label>
+                                            <div class="col-sm-8">
+                                                <input id="study" name="study" type="text" class="form-control input-sm" placeholder="" value="">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">工作经历</label>
+                                                <div class="col-sm-8">
+                                                    <input id="work" name="work" type="text" class="form-control input-sm" placeholder="" value="">
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                     
+                                    </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">自我评价</label>
+                                            <div class="col-sm-8">
+                                                <input id="evaluate" name="evaluate" type="text" class="form-control input-sm" placeholder="" value="">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+
+                                    <input id="ListData" name="ListData" type="hidden" class="form-control input-sm" placeholder="" value="">
+</form>
+                        </div>
+
+
+                        <table id="example1" class="table table-bordered table-striped table-hover"></table>
+
+                        <div class="row" style="margin-top: 20px; ">
+                            <button id="btn_saveOcr" type="button" class="btn btn-primary btn-sm">保存到数据库</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+@section scripts{
+    <script src="~/Scripts/t2m_adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/t2m_adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/Scripts/t2m_adminlte/bower_components/datatables.net/buttons/dataTables.buttons.js"></script>
+    <script src="~/Scripts/t2m_adminlte/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
+    <script src="~/Scripts/t2m_adminlte/js/datatables/dataTablesForTDF.js"></script>
+    <script>
+
+        $(function () {
+
+            function run(input_file, get_data) {
+                /*input_file：文件按钮对象*/
+                /*get_data: 转换成功后执行的方法*/
+                if (typeof (FileReader) === 'undefined') {
+                    alert("抱歉，你的浏览器不支持 FileReader，不能将图片转换为Base64，请使用现代浏览器操作！");
+                } else {
+                    try {
+                        /*图片转Base64 核心代码*/
+                        var file = input_file[0].files[0];
+                        //这里我们判断下类型如果不是图片就返回 去掉就可以上传任意文件  
+                        if (!/image\/\w+/.test(file.type)) {
+                            alert("请确保文件为图像类型");
+                            return false;
+                        }
+                        var reader = new FileReader();
+                        reader.onload = function () {
+                            get_data(this.result);
+
+                        }
+                        reader.readAsDataURL(file);
+                    } catch (e) {
+                        alert('图片转Base64出错啦！' + e.toString())
+                    }
+                }
+            }
+            //过滤
+            function minmax(res, min, max) {
+                var ail = res;
+                return (ail >= min && ail <= max);
+            }
+            $("#img").change(function () {
+                run($(this), function (res) {
+                    $("#imgRead").attr('src', res);
+                    res = res.split(",")[1]
+                    //  console.log(res);
+                    a = "{\"image\":\"" + res + "\",\"configure\":\"{\\\"min_size\\\" : 6,\\\"output_prob\\\" : true}\"}";
+                    $.ajax({
+                        contentType: "application/json; charset=utf-8",
+                        type: "post",
+                        url: "http://tysbgpu.market.alicloudapi.com/api/predict/ocr_general",
+                        data: a,
+                        dataType: "json",
+                        async: true,
+
+                        beforeSend: function (request) {
+
+                            request.setRequestHeader("Authorization", "APPCODE d8349d96d97d47a7b329f1105cb706fe");
+
+                        },
+                        success: function (result) {
+                           // console.log(result);
+                            for(var i in result.ret) {//不使用过滤
+                               // console.log(i, ":", result.ret[i]);
+                                if (!result.ret[i].rect) {
+                                    return false;
+                                }
+                                //姓名
+                                if (minmax(result.ret[i].rect.left, 150, 175) && minmax(result.ret[i].rect.top, 65, 75)) {
+                                    $("#name").val(result.ret[i].word);
+                                }
+                                //年龄
+                                if (minmax(result.ret[i].rect.left, 410, 430) && minmax(result.ret[i].rect.top, 76, 82)) {
+                                    $("#age").val(result.ret[i].word);
+                                }
+                                //性别
+                                if (minmax(result.ret[i].rect.left, 130, 150) && minmax(result.ret[i].rect.top, 125, 131)) {
+                                    $("#sex").val(result.ret[i].word);
+                                }
+                                //学历
+                                if (minmax(result.ret[i].rect.left, 410, 420) && minmax(result.ret[i].rect.top, 120, 130)) {
+                                    $("#education").val(result.ret[i].word);
+                                }
+                                //籍贯
+                                if (minmax(result.ret[i].rect.left, 150, 160) && minmax(result.ret[i].rect.top, 160, 165)) {
+                                    $("#Place").val(result.ret[i].word);
+                                }
+                                //民族
+                                if (minmax(result.ret[i].rect.left, 410, 420) && minmax(result.ret[i].rect.top, 170, 175)) {
+                                    $("#nation").val(result.ret[i].word);
+                                }
+                                //身份证
+                                if (minmax(result.ret[i].rect.left, 170, 185) && minmax(result.ret[i].rect.top, 180, 190)) {
+                                    $("#meid").val(result.ret[i].word);
+                                }
+
+                                //身高
+                                if (minmax(result.ret[i].rect.left, 150, 160) && minmax(result.ret[i].rect.top, 255, 260)) {
+                                    $("#height").val(result.ret[i].word);
+                                }
+                                //体重
+                                if (minmax(result.ret[i].rect.left, 410, 420) && minmax(result.ret[i].rect.top, 260, 270)) {
+                                    $("#weight").val(result.ret[i].word);
+                                }
+                                //业余爱好
+                                if (minmax(result.ret[i].rect.left, 160, 185) && minmax(result.ret[i].rect.top, 270, 285)) {
+                                    $("#avocation").val(result.ret[i].word);
+                                }
+                                //联系方式
+                                if (minmax(result.ret[i].rect.left, 160, 185) && minmax(result.ret[i].rect.top, 320, 340)) {
+                                    $("#call").val(result.ret[i].word);
+                                }
+                                //婚姻状况
+                                if (minmax(result.ret[i].rect.left, 160, 185) && minmax(result.ret[i].rect.top, 370, 380)) {
+                                    $("#marital").val(result.ret[i].word);
+                                }
+                                //兴趣爱好
+                                if (minmax(result.ret[i].rect.left, 180, 200) && minmax(result.ret[i].rect.top, 400, 410)) {
+                                    $("#love").val(result.ret[i].word);
+                                }
+
+                                //学习经历
+                                if (minmax(result.ret[i].rect.left, 45, 60) && minmax(result.ret[i].rect.top, 490, 505)) {
+                                    $("#study").val(result.ret[i].word);
+                                }
+
+
+                                //工作经历
+                                if (minmax(result.ret[i].rect.left, 0, 10) && minmax(result.ret[i].rect.top, 630, 640)) {
+                                    $("#work").val(result.ret[i].word);
+                                }
+                                //自我评价
+                                if (minmax(result.ret[i].rect.left, 0, 10) && minmax(result.ret[i].rect.top, 720, 730)) {
+                                    $("#evaluate").val(result.ret[i].word);
+                                }
+
+                            }
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            console.log(xhr)
+                        }
+                    });
+                    //ajax结束
+                })
+            });
+        })
+     
+    </script>
+
+}
+
+
