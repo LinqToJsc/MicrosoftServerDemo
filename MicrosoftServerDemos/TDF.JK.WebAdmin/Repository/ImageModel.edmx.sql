@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/28/2017 15:26:24
+-- Date Created: 11/30/2017 14:40:59
 -- Generated from EDMX file: D:\CONDING\MicrosoftServerDemo\MicrosoftServerDemos\TDF.JK.WebAdmin\Repository\ImageModel.edmx
 -- --------------------------------------------------
 
@@ -43,7 +43,8 @@ CREATE TABLE [dbo].[UserInfoSet] (
     [Interest] nvarchar(max)  NOT NULL,
     [LearningExperience] nvarchar(max)  NOT NULL,
     [workExperience] nvarchar(max)  NOT NULL,
-    [SelfEvaluation] nvarchar(max)  NOT NULL
+    [SelfEvaluation] nvarchar(max)  NOT NULL,
+    [ImgSrc] nvarchar(max)  NOT NULL
 );
 GO
 

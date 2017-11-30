@@ -29,5 +29,6 @@ namespace TDF.JK.WebAdmin.Repository
         public string LearningExperience { get; set; }
         public string workExperience { get; set; }
         public string SelfEvaluation { get; set; }
+        public string ImgSrc { get; set; }
     }
 }
