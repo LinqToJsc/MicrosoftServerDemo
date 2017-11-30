@@ -97,12 +97,14 @@
                     <div class="col-md-4">
                         <input id="imgFaceFile1" class="hide" type="file" data-face-img-id="imgFace1"/>
                         <input name="faceToface1" type="text" style="width: 340px; display: inline-block;" class="form-control input-sm" placeholder="Image URL">
+                        <input id="imgFaceId1" class="hide img-face-id" type="hidden" value="" />
                         <button class="btn btn-info btn-sm sub_verify" type="button"> 比 对 </button>
                         <button class="btn btn-info btn-sm faceToface-cloud-upload" type="button" data-face-id="imgFaceFile1" > <i class="fa fa-cloud-upload" aria-hidden="true"></i> 浏 览</button>
                     </div>
                     <div class="col-md-4">
                         <input id="imgFaceFile2" class="hide" type="file" data-face-img-id="imgFace2"/>
                         <input name="faceToface2" type="text" style="width: 340px; display: inline-block;" class="form-control input-sm" placeholder="Image URL">
+                        <input id="imgFaceId2" class="hide img-face-id" type="hidden" value="" />
                         <button class="btn btn-info btn-sm sub_verify" type="button"> 比 对 </button>
                         <button class="btn btn-info btn-sm faceToface-cloud-upload" type="button" data-face-id="imgFaceFile2"> <i class="fa fa-cloud-upload" aria-hidden="true"></i> 浏 览</button>
                     </div>
@@ -111,9 +113,10 @@
                 <div class="row" style="margin-top: 10px;">
                     <div class="col-md-1"></div>
                     <div class="col-md-8">
-                        <h4 style="color: red;">
-                            这不是同一个人，匹配指数 10.2%    
+                        <h4 id="faceReslut" style="color: red;">
+                            这不是同一个人，匹配指数 10.2%
                         </h4>
+                        <div id="faceReslutJson"></div>
                     </div>
                 </div>
             </div>
@@ -142,6 +145,8 @@
 
                 var $imgText = $(this).parent().find('input:eq(1)');
                 var $img = $('#' + data.faceImgId);
+                var $imgFaceId = $(this).parent().find('input:eq(2)');
+                $imgFaceId.val('');
                 files = $(this).prop('files');
                 if (files.length > 0) {
                     file = files[0];
@@ -166,8 +171,15 @@
                             data: formData,
                             processData: false,
                             contentType: false,
-                            success: function (data) {
-
+                            success: function(data) {
+                                if (data) {
+                                    var faceApiResult = JSON.parse(data.Result);
+                                    if (faceApiResult.length > 0) {
+                                        $('#faceReslutJson').html(JSON.stringify(faceApiResult));
+                                        var faceRectangle = faceApiResult[0].faceRectangle;
+                                        $imgFaceId.val(faceApiResult[0].faceId);
+                                    }
+                                }
                                 //if (data.Success) { //上传成功
 
                                 //} else { // 上传失败
@@ -176,7 +188,7 @@
                                 //}
 
                             },
-                            error: function (error) {
+                            error: function(error) {
 
                             }
                         });
