@@ -162,6 +162,7 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\comm\json-form.js" />
     <Content Include="Scripts\DemoJson1.json" />
     <None Include="Properties\PublishProfiles\webJK.pubxml" />
     <EntityDeploy Include="Repository\ImageModel.edmx">

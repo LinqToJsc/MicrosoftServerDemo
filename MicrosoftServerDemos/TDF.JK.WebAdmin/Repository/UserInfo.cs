@@ -16,6 +16,7 @@ namespace TDF.JK.WebAdmin.Repository
     {
         public System.Guid Id { get; set; }
         public string Name { get; set; }
+        public string Age { get; set; }
         public string Gender { get; set; }
         public string Education { get; set; }
         public string NativePlace { get; set; }
@@ -23,6 +24,7 @@ namespace TDF.JK.WebAdmin.Repository
         public string Identification { get; set; }
         public string Height { get; set; }
         public string Weight { get; set; }
+        public string Avocation { get; set; }
         public string Phone { get; set; }
         public string Marital { get; set; }
         public string Interest { get; set; }

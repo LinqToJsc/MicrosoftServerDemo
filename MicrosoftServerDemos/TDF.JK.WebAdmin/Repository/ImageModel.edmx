@@ -14,6 +14,7 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Age" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Gender" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Education" Type="nvarchar(max)" Nullable="false" />
     <Property Name="NativePlace" Type="nvarchar(max)" Nullable="false" />
@@ -21,6 +22,7 @@
     <Property Name="Identification" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Height" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Weight" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Avocation" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Marital" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Interest" Type="nvarchar(max)" Nullable="false" />
@@ -42,6 +44,7 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Age" Type="String" Nullable="false" />
           <Property Name="Gender" Type="String" Nullable="false" />
           <Property Name="Education" Type="String" Nullable="false" />
           <Property Name="NativePlace" Type="String" Nullable="false" />
@@ -49,6 +52,7 @@
           <Property Name="Identification" Type="String" Nullable="false" />
           <Property Name="Height" Type="String" Nullable="false" />
           <Property Name="Weight" Type="String" Nullable="false" />
+          <Property Name="Avocation" Type="String" Nullable="false" />
           <Property Name="Phone" Type="String" Nullable="false" />
           <Property Name="Marital" Type="String" Nullable="false" />
           <Property Name="Interest" Type="String" Nullable="false" />
@@ -68,6 +72,7 @@
         <MappingFragment StoreEntitySet="UserInfoSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
           <ScalarProperty Name="Gender" ColumnName="Gender" />
           <ScalarProperty Name="Education" ColumnName="Education" />
           <ScalarProperty Name="NativePlace" ColumnName="NativePlace" />
@@ -75,6 +80,7 @@
           <ScalarProperty Name="Identification" ColumnName="Identification" />
           <ScalarProperty Name="Height" ColumnName="Height" />
           <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Avocation" ColumnName="Avocation" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="Marital" ColumnName="Marital" />
           <ScalarProperty Name="Interest" ColumnName="Interest" />
