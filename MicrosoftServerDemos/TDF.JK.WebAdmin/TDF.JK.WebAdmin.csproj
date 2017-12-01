@@ -2101,6 +2101,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\FaceApi\FaceApiConfig.cs" />
+    <Compile Include="Models\FaceApi\FaceDataModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ImageModel.Context1.cs">
       <AutoGen>True</AutoGen>

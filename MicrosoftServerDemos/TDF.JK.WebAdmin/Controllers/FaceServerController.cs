@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using TDF.JK.WebAdmin.Models.FaceApi;
 
@@ -56,50 +57,18 @@ namespace TDF.JK.WebAdmin.Controllers
                 response = await client.PostAsync(uri, content);
                 var code = response.StatusCode;
                 var contentStr = response.Content.ReadAsStringAsync();
+                JObject jobject = JObject.Parse(contentStr.Result);
                 
+                //jobject.AddFirst(new JProperty("A","上课"));
+
+                var ff2 = jobject.ToString();
                 return Json(contentStr);
             }
         }
 
 
-
-        //[HttpPost]
-        //public  ActionResult ImgFaceDetect()
-        //{
-        //    var files = Request.Files;
-        //    var file = files["FileModel"];
-        //    var imgStream = file.InputStream;
-
-
-        //    var client = new HttpClient();
-        //    var queryString = HttpUtility.ParseQueryString(string.Empty);
-
-        //    // Request headers
-        //    client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", FaceApiConfig.subscriptionKey);
-
-        //    // Request parameters
-        //    queryString["userData"] = "{AA}";
-        //    queryString["targetFace"] = "{BB}";
-        //    var uri = FaceApiConfig.uriBase + "detect";
-
-        //    HttpResponseMessage response;
-
-        //    // Request body
-        //    //byte[] byteData = Encoding.UTF8.GetBytes("{body}");
-        //    byte[] byteData = StreamToBytes(imgStream);
-        //    using (var content = new ByteArrayContent(byteData))
-        //    {
-        //        content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-
-                
-        //        response = client.PostAsync(uri, content);
-        //        var code = response.StatusCode;
-        //        return Json(code);
-        //    }
-        //}
-
+        
         /// 将 Stream 转成 byte[]
-
         public byte[] StreamToBytes(Stream stream)
         {
             byte[] bytes = new byte[stream.Length];
