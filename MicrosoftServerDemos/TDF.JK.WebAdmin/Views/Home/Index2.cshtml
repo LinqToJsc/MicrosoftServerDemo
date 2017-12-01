@@ -67,16 +67,12 @@
 
         var tabColumns = [
             { "data": "Id", "title": "" }, //{}
-            { "data": "Item1", "title": "名称", orderable: true },//
-            { "data": "Item2", "title": "管辖区域" },
-            { "data": "Item3", "title": "面积", orderable: true },
-            { "data": "Item4", "title": "拿地", orderable: true },
-            { "data": "Item5", "title": "展示", orderable: true },
-            { "data": "Item6", "title": "开盘", orderable: true },
-            { "data": "Item7", "title": "交房", orderable: true },
-            { "data": "Item8", "title": "项目经理" },
-            { "data": "Item9", "title": "状态", orderable: true },
-            //{ "data": "Id", "title": "操作", render: function (data, type, row, meta) { return "<a href=\"@Url.Action("Index4")\">详 情</a>"; } }
+            { "data": "Name", "title": "名字", orderable: true },//
+            { "data": "Age", "title": "年龄" },
+            { "data": "Education", "title": "学历", orderable: true },
+            { "data": "NativePlace", "title": "重庆", orderable: true },
+            { "data": "Nation", "title": "民族", orderable: true },
+            { "data": "Id", "title": "操作", render: function (data, type, row, meta) { return "<a data-id=\""+data +"\" href=\"javasrcipt:;\">详 情</a>"; } }
         ];
 
         //通常用于对参数的额外加工 回调函数
@@ -94,7 +90,7 @@
             searchTextWidth: "200px" //默认搜索框的宽度 默认值：标准宽度
         };
 
-        var jscTable = TdfDataTableParams.CreateDataTable('example1', 'form_search', '/Scripts/DemoJson1.json', tabColumns, opts, serverParam);
+        var jscTable = TdfDataTableParams.CreateDataTable('example1', 'form_search', '/Home/GetUserInfo', tabColumns, opts, serverParam);
 
     </script>
 

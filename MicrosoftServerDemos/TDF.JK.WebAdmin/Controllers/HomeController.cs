@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,7 +13,8 @@ namespace TDF.JK.WebAdmin.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+                     
+            return Redirect("Home/Add"); 
         }
 
         public ActionResult Index2()
@@ -47,6 +49,18 @@ namespace TDF.JK.WebAdmin.Controllers
         {
             
             return View();
+        }
+
+        [HttpGet]
+        public string GetUserInfo(int PageIndex,int PageSize,int draw)
+        {
+            using (var db = new ImageModelContainer())
+            {               
+                var resList =  db.UserInfoSet.Select(u => u);                                       
+                var jsonResult = new { draw = draw, recordsTotal = 6, recordsFiltered = 6,error ="",data = resList };
+                return JsonConvert.SerializeObject(jsonResult);
+            };
+        
         }
     }
 }
