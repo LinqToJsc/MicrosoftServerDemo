@@ -32,6 +32,12 @@ namespace TDF.JK.WebAdmin.Controllers
             return View();
         }
 
+        public ActionResult Details()
+        {
+            return View();
+        }
+        
+
         [HttpPost]
         public bool AddUserInfo(UserInfo userInfo)
         {
@@ -61,6 +67,19 @@ namespace TDF.JK.WebAdmin.Controllers
                 return JsonConvert.SerializeObject(jsonResult);
             };
         
+        }
+
+        [HttpGet]
+        public string DetailsList(Guid uid)
+        {
+           
+            using (var db = new ImageModelContainer())
+            {
+               
+                var resList = db.UserInfoSet.Where(u=>u.Id == uid).Select(u => u);
+             
+                return JsonConvert.SerializeObject(resList);
+            };
         }
     }
 }
