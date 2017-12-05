@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -31,7 +32,8 @@ namespace TDF.JK.WebAdmin.Controllers
             var imgStream = file.InputStream;
 
             var img = Image.FromStream(imgStream);
-            var ff = img.Height;
+            var initialWidth = img.Width;
+            var initialHeight = img.Height;
 
             var client = new HttpClient();
             var queryString = HttpUtility.ParseQueryString(string.Empty);
@@ -40,7 +42,7 @@ namespace TDF.JK.WebAdmin.Controllers
             client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", FaceApiConfig.subscriptionKey);
 
             // Request parameters
-            queryString["returnFaceLandmarks"] = "true";
+            //queryString["returnFaceLandmarks"] = "true";
             queryString["returnFaceAttributes"] = "age,gender";
             var uri = FaceApiConfig.uriBase + "detect?"+ queryString;
 
@@ -48,26 +50,65 @@ namespace TDF.JK.WebAdmin.Controllers
 
             // Request body
             //byte[] byteData = Encoding.UTF8.GetBytes("{body}");
+            imgStream.Position = 0;
             byte[] byteData = StreamToBytes(imgStream);
             using (var content = new ByteArrayContent(byteData))
             {
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
 
-
                 response = await client.PostAsync(uri, content);
                 var code = response.StatusCode;
                 var contentStr = response.Content.ReadAsStringAsync();
-                JObject jobject = JObject.Parse(contentStr.Result);
+                var result = contentStr.Result;
+                if (code == HttpStatusCode.OK)
+                {
+                    JToken jt = JToken.Parse(result);
+                    if (jt.Type == JTokenType.Array)
+                    {
+                        List<FaceDataModel> faceList = JsonConvert.DeserializeObject<List<FaceDataModel>>(result);
+                        return Json(new { Success = true, InitialWidth = initialWidth, InitialHeight = initialHeight, Result = faceList });
+                    }
+                    else
+                    {
+                        var faceError = JsonConvert.DeserializeObject<FaceApiErrorModel>(result);
+                        return Json(new { Success = false, InitialWidth = initialWidth, InitialHeight = initialHeight, Result = faceError });
+                    }
+                }
                 
-                //jobject.AddFirst(new JProperty("A","上课"));
-
-                var ff2 = jobject.ToString();
-                return Json(contentStr);
+                return Json(new { Success = false, Result = result });
             }
         }
 
+        [HttpGet]
+        public async Task<ActionResult> FaceVerify(string faceId1, string faceId2)
+        {
+            
+            var client = new HttpClient();
+            var queryString = HttpUtility.ParseQueryString(string.Empty);
 
-        
+            // Request headers
+            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", FaceApiConfig.subscriptionKey);
+            var uri = FaceApiConfig.uriBase + "verify?" + queryString;
+
+            byte[] byteData =
+                Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new {faceId1 = faceId1, faceId2 = faceId2}));
+            HttpResponseMessage response;
+            using (var content = new ByteArrayContent(byteData))
+            {
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                response = await client.PostAsync(uri, content);
+                var code = response.StatusCode;
+                var contentStr = response.Content.ReadAsStringAsync();
+                var result = contentStr.Result;
+                if (code == HttpStatusCode.OK)
+                {
+                    return Json(new { Success = true, Result= result }, JsonRequestBehavior.AllowGet);
+                }
+            }
+
+            return Json(new { Success = false, Result = "" }, JsonRequestBehavior.AllowGet);
+        }
+
         /// 将 Stream 转成 byte[]
         public byte[] StreamToBytes(Stream stream)
         {
