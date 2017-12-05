@@ -166,7 +166,7 @@
 
             var change = function () {
 
-                $('#faceTofaceVerify').find('button').prop('disabled',true);
+                
 
                 $('#faceReslutJson').html('');
                 var files;
@@ -179,6 +179,8 @@
                 $imgFaceId.val('');
                 files = $(this).prop('files');
                 if (files.length > 0) {
+                    $('#faceTofaceVerify').find('button').prop('disabled', true);
+
                     file = files[0];
                     if (isImageFile(file)) {
                         var url = URL.createObjectURL(file);
@@ -225,8 +227,6 @@
                         });
                     }
                 }
-                $('#faceTofaceVerify').find('button').prop('disabled', false);
-
             }
 
             $('.faceToface-cloud-upload').on('click', function(e) {
@@ -237,7 +237,9 @@
 
             $('#faceTofaceVerify').find("input[type='file']").on('change', $.proxy(change));
 
-            $('.sub_verify').on('click', function() {
+            $('.sub_verify').on('click', function () {
+                $('#faceReslut').html('');
+
                 var faceId1 = $('#imgFaceId1').val();
                 var faceId2 = $('#imgFaceId2').val();
                 if (faceId1 && faceId2) {
