@@ -64,7 +64,7 @@
     <script src="~/Scripts/t2m_adminlte/js/datatables/dataTablesForTDF.js"></script>
     <script>
 
-
+    
         var tabColumns = [
             { "data": "Id", "title": "" }, //{}
             { "data": "Name", "title": "名字", orderable: true },//
@@ -72,7 +72,7 @@
             { "data": "Education", "title": "学历", orderable: true },
             { "data": "NativePlace", "title": "重庆", orderable: true },
             { "data": "Nation", "title": "民族", orderable: true },
-            { "data": "Id", "title": "操作", render: function (data, type, row, meta) { return "<a data-id=\""+data +"\" href=\"javasrcipt:;\">详 情</a>"; } }
+            { "data": "Id", "title": "操作", render: function (data, type, row, meta) { return "<a  data-id=\"" + data + "\" href=\"/Home/Details?uid="+data+"\">详 情</a>"; } }
         ];
 
         //通常用于对参数的额外加工 回调函数
