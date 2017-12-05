@@ -14,7 +14,22 @@ namespace TDF.JK.WebAdmin.Models.FaceApi
 
         public FaceAttributesData faceAttributes { get; set; }
 
-        public FaceLandmarksData faceLandmarks { get; set; }
+        //public FaceLandmarksData faceLandmarks { get; set; }
+
+    }
+
+    public class FaceApiErrorModel
+    {
+        public FaceErrorData error { get; set; }
+    }
+
+    public class FaceErrorData
+    {
+        public string code { get; set; }
+
+        public int statusCode { get; set; }
+
+        public string message { get; set; }
 
     }
 
@@ -28,7 +43,9 @@ namespace TDF.JK.WebAdmin.Models.FaceApi
 
     public class FaceAttributesData
     {
-        public object hair { get; set; }
+        public double age { get; set; }
+
+        public string gender { get; set; }
     }
 
     public class FaceLandmarksData
