@@ -52,7 +52,7 @@
                             <div class="col-md-6">
 
                               
-                                <button id="btn_ocr" type="button" class="btn btn-default btn-sm" onclick="return $('#img').click()">开始识别</button>
+                                <button style="display:none" id="btn_ocr" type="button" class="btn btn-default btn-sm" onclick="return $('#img').click()">开始识别</button>
                                 <input type="file"  id="img" accept="image/*" style="display:none">
 
                             </div>
@@ -234,7 +234,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">兴趣爱好</label>
                                                 <div class="col-sm-8">
-                                                    <input id="Interest" name="Interest" type="text" class="form-control input-sm" placeholder="" value="无">
+                                                    <input id="Interest" name="Interest" type="text" class="form-control input-sm" placeholder="" value="">
                                                 </div>
                                             </div>
 
@@ -295,7 +295,7 @@
                         <table id="example1" class="table table-bordered table-striped table-hover"></table>
 
                         <div class="row" style="margin-top: 20px; ">
-                            <button id="btn_saveOcr" type="button" class="btn btn-primary btn-sm">保存到数据库</button>
+                            <button style="display:none" id="btn_saveOcr" type="button" class="btn btn-primary btn-sm">保存到数据库</button>
                         </div>
                     </div>
                 </div>
